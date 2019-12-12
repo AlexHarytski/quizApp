@@ -7,7 +7,6 @@ namespace quizApp.Domain.Models
         public string Title { get; set; }
         public string Question { get; set; }
         public int Score { get; set; }
-        public string QuizId { get; set; }
         public List<QuestionVariant> Variants { get; set; }      
     }
 }
