@@ -1,12 +1,12 @@
 ﻿namespace quizApp.Persistence
 {
-    public class QuizUow
+    public class QuizUOW
     {
         public QuizRepository QuizRepository { get; set; }
         public UserRepository UserRepository { get; set; }
         public QuizResultRepository QuizResultRepository { get; set; }
 
-        public QuizUow(IQuizDatabaseSettings dbSettings)
+        public QuizUOW(IQuizDatabaseSettings dbSettings)
         {
             QuizRepository = new QuizRepository(dbSettings);
             UserRepository = new UserRepository(dbSettings);
