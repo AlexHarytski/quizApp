@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace quizApp.Domain.Models
 {
     public class Quiz
     {
         public ObjectId _id { get; set; }
+        public string Title { get; set; }
         public string QuizType { get; set; }
-        public string Description { get; set; }
-        public List<QuizQuestion> Questions { get; set; }
+        public List<QuizQuestion> QuizQuestion { get; set; }
     }
 }

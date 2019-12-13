@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using quizApp.Persistence;
+using quizApp.Services;
 
 namespace quizApp
 {
@@ -25,6 +28,10 @@ namespace quizApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<QuizDatabaseSettings>(Configuration.GetSection(nameof(QuizDatabaseSettings)));
+            services.AddSingleton<IQuizDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value);
+            services.AddSingleton<QuizService>();
             services.AddControllers();
         }
 

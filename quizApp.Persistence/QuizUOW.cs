@@ -8,8 +8,9 @@
 
         public QuizUOW(IQuizDatabaseSettings dbSettings)
         {
-            QuizRepository = new QuizRepository(dbSettings);
             UserRepository = new UserRepository(dbSettings);
+            QuizRepository = new QuizRepository(dbSettings);
+
             QuizResultRepository = new QuizResultRepository(dbSettings);
         }
     }
