@@ -5,16 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.10.0" />
-    <PackageReference Include="MongoDB.Driver.Core" Version="2.10.0" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\quizApp.Domain\quizApp.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Scripts\" />
+    <ProjectReference Include="..\quizApp.Persistence\quizApp.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
