@@ -6,11 +6,10 @@ namespace quizApp.Persistence
     public interface IRepositoryGeneric<TEntity> where TEntity: class
     {
         List<TEntity> GetList();
-        List<TEntity> GetList(Predicate<TEntity> predicate);
-        TEntity FindById(int id);
+        List<TEntity> GetList(Func<TEntity, bool> predicate);
+        TEntity FindById(string id);
         void Create(TEntity item);
         void Remove(TEntity item);
         void Update(TEntity item);
-
     }
 }
