@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using quizApp.Domain.Models;
-using quizApp.Services;
+using quizApp.Application.Services;
 
 namespace quizApp.Controllers
 {
