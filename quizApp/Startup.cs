@@ -15,7 +15,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using quizApp.Application.Handlers;
 using quizApp.Persistence;
-using quizApp.Application.Services;
 using  quizApp.Application.Queries;
 
 namespace quizApp
@@ -35,7 +34,6 @@ namespace quizApp
             services.Configure<QuizDatabaseSettings>(Configuration.GetSection(nameof(QuizDatabaseSettings)));
             services.AddSingleton<IQuizDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value);
-            services.AddSingleton<QuizService>();
             services.AddMediatR(typeof(quizApp.Application.Handlers.GetAllQuizzesHandler).Assembly);
             services.AddControllers();
         }

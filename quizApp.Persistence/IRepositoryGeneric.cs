@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace quizApp.Persistence
 {
     public interface IRepositoryGeneric<TEntity> where TEntity: class
     {
-        List<TEntity> GetList();
-        List<TEntity> GetList(Func<TEntity, bool> predicate);
-        TEntity FindById(string id);
-        void Create(TEntity item);
-        void Remove(TEntity item);
-        void Update(TEntity item);
+        Task<List<TEntity>> GetListAsync();
+        Task<List<TEntity>> GetListAsync(Func<TEntity, bool> predicate);
+        Task<TEntity> FindByIdAsync(string id);
+        Task CreateAsync(TEntity item);
+        Task RemoveAsync(TEntity item);
+        Task UpdateAsync(TEntity item);
     }
 }

@@ -19,7 +19,7 @@ namespace quizApp.Application.Handlers
 
         public async Task<List<User>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var list = _repository.GetList();
+            var list = await _repository.GetListAsync();
             return list;
         }
     }

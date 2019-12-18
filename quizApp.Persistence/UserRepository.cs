@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MongoDB.Driver;
 using quizApp.Domain.Models;
 
@@ -15,34 +16,38 @@ namespace quizApp.Persistence
 
             _collection = database.GetCollection<User>(dbSettings.UserCollectionName);
         }
-        public List<User> GetList()
+        public async Task<List<User>> GetListAsync()
         {
-            return _collection.Find(user => true).ToList();
+            var users = await _collection.FindAsync(user => true);
+            var list = users.ToList();
+            return list;
         }
 
-        public List<User> GetList(Func<User, bool> predicate)
+        public async Task<List<User>> GetListAsync(Func<User, bool> predicate)
         {
-            return _collection.Find(user => predicate.Invoke(user)).ToList();
+            var users = await _collection.FindAsync(user => predicate.Invoke(user));
+            var list = users.ToList();
+            return list;
         }
 
-        public User FindById(string id)
+        public async Task<User> FindByIdAsync(string id)
         {
-            return _collection.Find(user => user._id.ToString() == id).FirstOrDefault();
+            return (await _collection.FindAsync(user => user._id.ToString() == id)).FirstOrDefault();
         }
 
-        public void Create(User item)
+        public async Task CreateAsync(User item)
         {
-            _collection.InsertOne(item);
+            await _collection.InsertOneAsync(item);
         }
 
-        public void Remove(User item)
+        public async Task RemoveAsync(User item)
         {
-            _collection.DeleteOne(user => user._id == item._id);
+            await _collection.DeleteOneAsync(user => user._id == item._id);
         }
 
-        public void Update(User item)
-        {
-            _collection.ReplaceOne(user => user._id == item._id, item);
+        public async Task UpdateAsync(User item)
+        { 
+            await _collection.ReplaceOneAsync(user => user._id == item._id, item);
         }
     }
 }
