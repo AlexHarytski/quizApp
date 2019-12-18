@@ -9,6 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\quizApp.Domain\quizApp.Domain.csproj" />
     <ProjectReference Include="..\quizApp.Persistence\quizApp.Persistence.csproj" />
   </ItemGroup>

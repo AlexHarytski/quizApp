@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,8 +13,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using quizApp.Application.Handlers;
 using quizApp.Persistence;
 using quizApp.Application.Services;
+using  quizApp.Application.Queries;
 
 namespace quizApp
 {
@@ -32,6 +36,7 @@ namespace quizApp
             services.AddSingleton<IQuizDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value);
             services.AddSingleton<QuizService>();
+            services.AddMediatR(typeof(quizApp.Application.Handlers.GetAllQuizzesHandler).Assembly);
             services.AddControllers();
         }
 
