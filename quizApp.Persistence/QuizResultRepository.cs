@@ -31,7 +31,7 @@ namespace quizApp.Persistence
 
         public async Task<QuizResult> FindByIdAsync(string id)
         {
-            return (await _collection.FindAsync(qr => qr._id == ObjectId.Parse(id))).FirstOrDefault();
+            return (await _collection.FindAsync(qr => qr._id == id)).FirstOrDefault();
         }
 
         public async Task CreateAsync(QuizResult item)
