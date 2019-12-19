@@ -38,9 +38,9 @@ namespace quizApp.Persistence
             await _collection.InsertOneAsync(item);
         }
 
-        public async Task RemoveAsync(QuizResult item)
+        public async Task RemoveAsync(string id)
         {
-            await _collection.DeleteOneAsync(qr => qr._id == item._id);
+            await _collection.DeleteOneAsync(qr => qr._id.ToString() == id);
         }
 
         public async Task UpdateAsync(QuizResult item)

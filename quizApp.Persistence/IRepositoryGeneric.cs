@@ -10,7 +10,7 @@ namespace quizApp.Persistence
         Task<List<TEntity>> GetListAsync(Func<TEntity, bool> predicate);
         Task<TEntity> FindByIdAsync(string id);
         Task CreateAsync(TEntity item);
-        Task RemoveAsync(TEntity item);
+        Task RemoveAsync(string Id);
         Task UpdateAsync(TEntity item);
     }
 }

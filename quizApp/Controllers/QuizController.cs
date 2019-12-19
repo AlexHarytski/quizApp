@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
+using quizApp.Application.Commands;
 using quizApp.Domain.Models;
 using quizApp.Application.Queries;
 
@@ -21,27 +23,66 @@ namespace quizApp.Controllers
             _mediator = mediator;
         }
 
+        
         [HttpGet]
         public async Task<IActionResult> GetQuizzes()
         {
             var query = new GetAllQuizzesQuery();
             var result = await _mediator.Send(query);
+
             return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetQuizById(string id)
+        {
+            var query = new GetQuizByIdQuery {Id = id};
+            var result = await _mediator.Send(query);
+            if (result == null)
+            {
+                return NotFound();
+            }
 
-        //if you want to check another repo
-        //VVVVVVVVV
-        //[HttpGet]
-        //public List<Quiz> GetQuizzes()
-        //{
-        //    return quizService.GetQuizzes();
-        //}
+            return Ok(result);
+        }
 
-        //[HttpGet]
-        //public List<QuizResult> GetResults()
-        //{
-        //    return quizService.GerResults();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> CreateQuiz(Quiz quiz)
+        {
+            var command = new CreateQuizCommand {Quiz = quiz};
+            var result =  await _mediator.Send(command);
+            if (result)
+            {
+                return Ok();
+            }
+
+            return NotFound();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteQuiz(string id)
+        {
+            var command = new DeleteQuizCommand{ Id = id };
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok();
+            }
+
+            return NotFound();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateQuiz(Quiz quiz)
+        {
+            var command  = new UpdateQuizCommand{ Quiz = quiz};
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok();
+            }
+
+            return NotFound();
+        }
     }
 }
