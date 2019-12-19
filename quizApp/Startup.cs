@@ -16,6 +16,7 @@ using Microsoft.Extensions.Options;
 using quizApp.Application.Handlers;
 using quizApp.Persistence;
 using  quizApp.Application.Queries;
+using Microsoft.OpenApi.Models;
 
 namespace quizApp
 {
@@ -34,6 +35,9 @@ namespace quizApp
             services.Configure<QuizDatabaseSettings>(Configuration.GetSection(nameof(QuizDatabaseSettings)));
             services.AddSingleton<IQuizDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value);
+            services.AddSwaggerGen( c =>
+                c.SwaggerDoc("v1", new OpenApiInfo{Title = "QuizApi", Version = "v1"})
+            );
             services.AddMediatR(typeof(quizApp.Application.Handlers.GetAllQuizzesHandler).Assembly);
             services.AddControllers();
         }
@@ -41,6 +45,9 @@ namespace quizApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuizApi V1"));
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

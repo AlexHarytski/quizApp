@@ -33,6 +33,7 @@ namespace quizApp.Controllers
             return Ok(result);
         }
 
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetQuizById(string id)
         {
@@ -46,6 +47,7 @@ namespace quizApp.Controllers
             return Ok(result);
         }
 
+        
         [HttpPost]
         public async Task<IActionResult> CreateQuiz(Quiz quiz)
         {
