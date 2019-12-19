@@ -33,7 +33,7 @@ namespace quizApp.Persistence
 
         public async Task<User> FindByIdAsync(string id)
         {
-            return (await _collection.FindAsync(user => user._id == ObjectId.Parse(id))).FirstOrDefault();
+            return (await _collection.FindAsync(user => user._id == id)).FirstOrDefault();
         }
 
         public async Task CreateAsync(User item)
@@ -43,7 +43,7 @@ namespace quizApp.Persistence
 
         public async Task RemoveAsync(string id)
         {
-            await _collection.DeleteOneAsync(user => user._id == ObjectId.Parse(id));
+            await _collection.DeleteOneAsync(user => user._id == id);
         }
 
         public async Task UpdateAsync(User item)
