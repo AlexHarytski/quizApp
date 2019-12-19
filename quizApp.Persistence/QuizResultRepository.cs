@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using quizApp.Domain.Models;
 
@@ -30,7 +31,7 @@ namespace quizApp.Persistence
 
         public async Task<QuizResult> FindByIdAsync(string id)
         {
-            return (await _collection.FindAsync(qr => qr._id.ToString() == id)).FirstOrDefault();
+            return (await _collection.FindAsync(qr => qr._id == ObjectId.Parse(id))).FirstOrDefault();
         }
 
         public async Task CreateAsync(QuizResult item)
@@ -40,7 +41,7 @@ namespace quizApp.Persistence
 
         public async Task RemoveAsync(string id)
         {
-            await _collection.DeleteOneAsync(qr => qr._id.ToString() == id);
+            await _collection.DeleteOneAsync(qr => qr._id == ObjectId.Parse(id));
         }
 
         public async Task UpdateAsync(QuizResult item)

@@ -40,7 +40,7 @@ namespace quizApp.Persistence
 
         public async Task RemoveAsync(string id)
         {
-            await _collection.DeleteOneAsync(quiz => quiz._id.ToString() == id);
+            await _collection.DeleteOneAsync(quiz => quiz._id == ObjectId.Parse(id));
         }
 
         public async Task UpdateAsync(Quiz item)
