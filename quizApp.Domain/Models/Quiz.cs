@@ -6,7 +6,9 @@ namespace quizApp.Domain.Models
 {
     public class Quiz
     {
-        public ObjectId _id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string _id { get; set; }
         public string Title { get; set; }
         public string QuizType { get; set; }
         public List<QuizQuestion> QuizQuestion { get; set; }

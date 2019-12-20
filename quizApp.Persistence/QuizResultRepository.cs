@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using quizApp.Domain.Models;
 
@@ -16,35 +18,35 @@ namespace quizApp.Persistence
 
             _collection = database.GetCollection<QuizResult>(dbSettings.QuizResultCollectionName);
         }
-        public List<QuizResult> GetList()
+        public async Task<List<QuizResult>>GetListAsync()
         {
             //qr is quizResult
-            return _collection.Find(qr => true).ToList();
+            return (await _collection.FindAsync(qr => true)).ToList();
         }
 
-        public List<QuizResult> GetList(Func<QuizResult, bool> predicate)
+        public async Task<List<QuizResult>> GetListAsync(Func<QuizResult, bool> predicate)
         {
-            return _collection.Find(qr => predicate.Invoke(qr)).ToList();
+            return (await _collection.FindAsync(qr => predicate.Invoke(qr))).ToList();
         }
 
-        public QuizResult FindById(string id)
+        public async Task<QuizResult> FindByIdAsync(string id)
         {
-            return _collection.Find(qr => qr._id.ToString() == id).FirstOrDefault();
+            return (await _collection.FindAsync(qr => qr._id == id)).FirstOrDefault();
         }
 
-        public void Create(QuizResult item)
+        public async Task CreateAsync(QuizResult item)
         {
-            _collection.InsertOne(item);
+            await _collection.InsertOneAsync(item);
         }
 
-        public void Remove(QuizResult item)
+        public async Task RemoveAsync(string id)
         {
-            _collection.DeleteOne(qr => qr._id == item._id);
+            await _collection.DeleteOneAsync(qr => qr._id == id);
         }
 
-        public void Update(QuizResult item)
+        public async Task UpdateAsync(QuizResult item)
         {
-            _collection.ReplaceOne(qr => qr._id == item._id, item);
+            await _collection.ReplaceOneAsync(qr => qr._id == item._id, item);
         }
     }
 }
