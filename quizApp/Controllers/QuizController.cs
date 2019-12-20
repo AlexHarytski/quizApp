@@ -37,7 +37,7 @@ namespace quizApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetQuizById(string id)
         {
-            var query = new GetQuizByIdQuery {Id = id};
+            var query = new GetQuizByIdQuery(id);
             var result = await _mediator.Send(query);
             if (result == null)
             {
@@ -51,7 +51,7 @@ namespace quizApp.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateQuiz(Quiz quiz)
         {
-            var command = new CreateQuizCommand {Quiz = quiz};
+            var command = new CreateQuizCommand(quiz);
             var result =  await _mediator.Send(command);
             if (result)
             {
@@ -64,7 +64,7 @@ namespace quizApp.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteQuiz(string id)
         {
-            var command = new DeleteQuizCommand{ Id = id };
+            var command = new DeleteQuizCommand(id);
             var result = await _mediator.Send(command);
             if (result)
             {
@@ -77,7 +77,7 @@ namespace quizApp.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateQuiz(Quiz quiz)
         {
-            var command  = new UpdateQuizCommand{ Quiz = quiz};
+            var command  = new UpdateQuizCommand(quiz);
             var result = await _mediator.Send(command);
             if (result)
             {

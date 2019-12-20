@@ -5,6 +5,11 @@ namespace quizApp.Application.Commands
 {
     public class CreateQuizCommand : IRequest<bool>
     {
-        public Quiz Quiz { get; set; }
+        public CreateQuizCommand(Quiz quiz)
+        {
+            Quiz = quiz;
+        }
+
+        public Quiz Quiz { get; private set; }
     }
 }

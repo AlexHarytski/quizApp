@@ -5,6 +5,11 @@ namespace quizApp.Application.Commands
 {
     public class UpdateQuizCommand: IRequest<bool>
     {
-        public Quiz Quiz { get; set; }
+        public UpdateQuizCommand(Quiz quiz)
+        {
+            Quiz = quiz;
+        }
+
+        public Quiz Quiz { get; private set; }
     }
 }

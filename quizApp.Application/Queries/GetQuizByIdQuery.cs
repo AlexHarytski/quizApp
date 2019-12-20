@@ -5,6 +5,11 @@ namespace quizApp.Application.Queries
 {
     public class GetQuizByIdQuery: IRequest<Quiz>
     {
-        public string Id { get; set; }
+        public GetQuizByIdQuery(string id)
+        {
+            Id = id;
+        }
+
+        public string Id { get; private set; }
     }
 }
