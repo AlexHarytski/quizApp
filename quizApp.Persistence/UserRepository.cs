@@ -19,9 +19,7 @@ namespace quizApp.Persistence
         }
         public async Task<List<User>> GetListAsync()
         {
-            var users = await _collection.FindAsync(user => true);
-            var list = users.ToList();
-            return list;
+            return (await _collection.FindAsync(user => true)).ToList();
         }
 
         public async Task<List<User>> GetListAsync(Func<User, bool> predicate)
