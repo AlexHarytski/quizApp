@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
@@ -29,6 +30,7 @@ namespace quizApp.Controllers
         {
             var query = new GetAllQuizzesQuery();
             var result = await _mediator.Send(query);
+
 
             return Ok(result);
         }
@@ -77,6 +79,10 @@ namespace quizApp.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateQuiz(Quiz quiz)
         {
+            if (quiz == null)
+            {
+                throw new NullReferenceException("QuizController.UpdateQuiz: NullReferenceException - quiz is null " + DateTime.Now);
+            }
             var command  = new UpdateQuizCommand(quiz);
             var result = await _mediator.Send(command);
             if (result)
