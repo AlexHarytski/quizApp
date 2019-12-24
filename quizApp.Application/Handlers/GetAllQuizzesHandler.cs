@@ -10,11 +10,11 @@ namespace quizApp.Application.Handlers
 {
     public class GetAllQuizzesHandler: IRequestHandler<GetAllQuizzesQuery, List<Quiz>>
     {
-        private readonly QuizRepository _repository;
+        private readonly IRepositoryGeneric<Quiz> _repository;
 
-        public GetAllQuizzesHandler(IQuizDatabaseSettings settings)
+        public GetAllQuizzesHandler(IRepositoryGeneric<Quiz> repository)
         {
-            _repository = new QuizRepository(settings);
+            _repository = repository;
         }
 
         public async Task<List<Quiz>> Handle(GetAllQuizzesQuery request, CancellationToken cancellationToken)

@@ -11,12 +11,12 @@ namespace quizApp.Application.Handlers
 {
     public class GetAllUsersHandler: IRequestHandler<GetAllUsersQuery, List<User>>
     {
-        private readonly UserRepository _repository;
+        private readonly IRepositoryGeneric<User> _repository;
 
         //public GetAllUsersHandler(IMongoDatabase db, IQuizDatabaseSettings settings)
-        public GetAllUsersHandler(IMongoCollection<User> userCollection)
+        public GetAllUsersHandler(IRepositoryGeneric<User> repository)
         {
-            _repository = new UserRepository(userCollection);
+            _repository = repository;
         }
 
         public async Task<List<User>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)

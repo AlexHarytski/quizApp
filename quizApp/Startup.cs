@@ -37,11 +37,30 @@ namespace quizApp
             services.Configure<QuizDatabaseSettings>(Configuration.GetSection(nameof(QuizDatabaseSettings)));
             services.AddSingleton<IQuizDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value);
-            services.AddSingleton<IMongoCollection<User>>(sp =>
+            services.AddSingleton(sp =>
                 new MongoClient(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.ConnectionString)
                     .GetDatabase(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.DatabaseName)
                     .GetCollection<User>(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.UserCollectionName)
                 );
+            services.AddSingleton(sp =>
+                new MongoClient(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.ConnectionString)
+                    .GetDatabase(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.DatabaseName)
+                    .GetCollection<Quiz>(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.QuizCollectionName)
+                );        
+            services.AddSingleton(sp =>
+                new MongoClient(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.ConnectionString)
+                    .GetDatabase(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.DatabaseName)
+                    .GetCollection<QuizResult>(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.QuizResultCollectionName)
+                );
+            services.AddSingleton<IRepositoryGeneric<Quiz>>(sp => new QuizRepository(
+                sp.GetService<IMongoCollection<Quiz>>()
+                ));
+            services.AddSingleton<IRepositoryGeneric<QuizResult>>(sp => new QuizResultRepository(
+                sp.GetService<IMongoCollection<QuizResult>>()
+                ));
+            services.AddSingleton<IRepositoryGeneric<User>>(sp => new UserRepository(
+                sp.GetService<IMongoCollection<User>>()
+                ));
             services.AddSwaggerGen( c =>
                 c.SwaggerDoc("v1", new OpenApiInfo{Title = "QuizApi", Version = "v1"})
             );
