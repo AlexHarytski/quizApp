@@ -17,6 +17,8 @@ using quizApp.Application.Handlers;
 using quizApp.Persistence;
 using  quizApp.Application.Queries;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
+using quizApp.Domain.Models;
 
 namespace quizApp
 {
@@ -35,6 +37,11 @@ namespace quizApp
             services.Configure<QuizDatabaseSettings>(Configuration.GetSection(nameof(QuizDatabaseSettings)));
             services.AddSingleton<IQuizDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value);
+            services.AddSingleton<IMongoCollection<User>>(sp =>
+                new MongoClient(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.ConnectionString)
+                    .GetDatabase(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.DatabaseName)
+                    .GetCollection<User>(sp.GetRequiredService<IOptions<QuizDatabaseSettings>>().Value.UserCollectionName)
+                );
             services.AddSwaggerGen( c =>
                 c.SwaggerDoc("v1", new OpenApiInfo{Title = "QuizApi", Version = "v1"})
             );
