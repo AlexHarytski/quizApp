@@ -19,7 +19,7 @@ namespace quizApp.UnitTest.Application
         public void Init()
         {
             _mock = new Mock<IRepositoryGeneric<Quiz>>();
-            _mock.Setup(r => r.CreateAsync(It.Is<Quiz>(q => q._id != string.Empty || q._id != null)))
+            _mock.Setup(r => r.CreateAsync(It.Is<Quiz>(q => q._id != string.Empty && q._id != null)))
                 .Throws<ArgumentException>();
             _mock.Setup(r => r.CreateAsync(It.Is<Quiz>(q => q._id == null || q._id == string.Empty)));
         }
