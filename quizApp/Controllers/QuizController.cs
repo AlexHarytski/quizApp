@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
@@ -15,6 +16,7 @@ namespace quizApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class QuizController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -51,6 +53,7 @@ namespace quizApp.Controllers
 
         
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateQuiz(Quiz quiz)
         {
             var command = new CreateQuizCommand(quiz);
@@ -64,6 +67,7 @@ namespace quizApp.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> DeleteQuiz(string id)
         {
             var command = new DeleteQuizCommand(id);
@@ -77,6 +81,7 @@ namespace quizApp.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> UpdateQuiz(Quiz quiz)
         {
             if (quiz == null)

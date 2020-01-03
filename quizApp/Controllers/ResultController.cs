@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using quizApp.Application.Commands;
@@ -49,6 +50,7 @@ namespace quizApp.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateResult(QuizResult quizResult)
         {
             var command = new CreateResultCommand(quizResult);
@@ -62,6 +64,7 @@ namespace quizApp.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> DeleteResult(string id)
         {
             var command = new DeleteResultCommand(id);
@@ -75,6 +78,7 @@ namespace quizApp.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> UpdateResult(QuizResult quizResult)
         {
             if (quizResult == null)

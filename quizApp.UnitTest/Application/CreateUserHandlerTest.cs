@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using Moq;
 using quizApp.Persistence;
 using quizApp.Domain.Models;
 using quizApp.Application.Commands;
+using quizApp.Application.Handlers;
 
 namespace quizApp.UnitTest.Application
 {
@@ -37,8 +40,8 @@ namespace quizApp.UnitTest.Application
         [Test]
         public async Task CreateQuizHandler_ResultFalse()
         {
-            var command = new CreateQuizCommand(new Quiz { _id = "1" });
-            var handler = new CreateQuizHandler(_mock.Object);
+            var command = new CreateUserCommand(new User { _id = "1" });
+            var handler = new CreateUserHandler(_mock.Object);
 
             var result = await handler.Handle(command, CancellationToken.None);
 
@@ -50,8 +53,8 @@ namespace quizApp.UnitTest.Application
         [TestCase(null)]
         public async Task CreateQuizHandler_ResultTrue(string value)
         {
-            var command = new CreateQuizCommand(new Quiz { _id = value });
-            var handler = new CreateQuizHandler(_mock.Object);
+            var command = new CreateUserCommand(new User { _id = value });
+            var handler = new CreateUserHandler(_mock.Object);
 
             var result = await handler.Handle(command, CancellationToken.None);
 
