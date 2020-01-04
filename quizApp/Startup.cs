@@ -62,8 +62,28 @@ namespace quizApp
                 sp.GetService<IMongoCollection<User>>()
                 ));
             services.AddSwaggerGen( c =>
-                c.SwaggerDoc("v1", new OpenApiInfo{Title = "QuizApi", Version = "v1"})
-            );
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "QuizApi", Version = "v1"});
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OpenIdConnect,
+                    Name = "quizApi",
+                    OpenIdConnectUrl = new Uri("http://localhost:5000"),
+                    Flows = new OpenApiOAuthFlows()
+                    {
+                        ClientCredentials = new OpenApiOAuthFlow()
+                        {
+                            Scopes = 
+                            {
+                                { "client_id", "bob"},
+                                { "password", "bob" }
+                            }
+                        }
+                    }
+                    
+                    
+                });
+            });
             services.AddMediatR(typeof(quizApp.Application.Handlers.GetAllQuizzesHandler).Assembly);
             services.AddControllers();
 

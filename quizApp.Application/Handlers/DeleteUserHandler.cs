@@ -1,28 +1,25 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using quizApp.Application.Commands;
 using quizApp.Domain.Models;
 using quizApp.Persistence;
 
 namespace quizApp.Application.Handlers
 {
-    public class CreateUserHandler: IRequestHandler<CreateUserCommand, bool>
+    public class DeleteUserHandler: IRequestHandler<DeleteUserCommand, bool>
     {
         private IRepositoryGeneric<User> _repository;
-        public CreateUserHandler(IRepositoryGeneric<User> repository)
+        public DeleteUserHandler(IRepositoryGeneric<User> repository)
         {
             _repository = repository;
         }
-        public async Task<bool> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                await _repository.CreateAsync(request.User);
+                await _repository.RemoveAsync(request.Id);
                 return true;
             }
             catch (Exception e)

@@ -45,6 +45,10 @@ namespace IdentityServer
                         "quizApi"
                     }
                 }, 
+                new Client()
+                {
+
+                }, 
                 //new Client
                 //{
                 //    ClientId = "client",
