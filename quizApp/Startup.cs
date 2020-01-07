@@ -5,11 +5,14 @@ using System.Reflection;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -19,6 +22,7 @@ using  quizApp.Application.Queries;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using quizApp.Domain.Models;
+using quizApp.HealthCheck;
 
 namespace quizApp
 {
@@ -83,6 +87,8 @@ namespace quizApp
                     
                     
                 });
+
+
             });
             services.AddMediatR(typeof(quizApp.Application.Handlers.GetAllQuizzesHandler).Assembly);
             services.AddControllers();
@@ -104,6 +110,8 @@ namespace quizApp
                         .AllowAnyMethod();
                 });
             });
+            services.AddHealthChecks()
+                .AddCheck<DatabaseHealthCheck>("database_check");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,10 +129,10 @@ namespace quizApp
             app.UseCors("default");
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }
