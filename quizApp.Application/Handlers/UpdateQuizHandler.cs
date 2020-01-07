@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -10,10 +11,10 @@ namespace quizApp.Application.Handlers
 {
     public class UpdateQuizHandler: IRequestHandler<UpdateQuizCommand, bool>
     {
-        private readonly QuizRepository _repository;
-        public UpdateQuizHandler(IQuizDatabaseSettings settings)
+        private readonly IRepositoryGeneric<Quiz> _repository;
+        public UpdateQuizHandler(IRepositoryGeneric<Quiz> repository)
         {
-            _repository = new QuizRepository(settings);
+            _repository = repository;
         }
 
         public async Task<bool> Handle(UpdateQuizCommand request, CancellationToken cancellationToken)

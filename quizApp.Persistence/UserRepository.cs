@@ -10,12 +10,9 @@ namespace quizApp.Persistence
     public class UserRepository: IRepositoryGeneric<User>
     {
         private readonly IMongoCollection<User> _collection;
-        public UserRepository(IQuizDatabaseSettings dbSettings)
+        public UserRepository(IMongoCollection<User> collection)
         {
-            IMongoClient client = new MongoClient(dbSettings.ConnectionString);
-            IMongoDatabase database = client.GetDatabase(dbSettings.DatabaseName);
-
-            _collection = database.GetCollection<User>(dbSettings.UserCollectionName);
+            _collection = collection;
         }
         public async Task<List<User>> GetListAsync()
         {

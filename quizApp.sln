@@ -9,7 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "quizApp.Domain", "quizApp.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "quizApp.Persistence", "quizApp.Persistence\quizApp.Persistence.csproj", "{2F1F9A0E-7178-41A8-BA36-589C3DC1F29C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quizApp.Application", "quizApp.Application\quizApp.Application.csproj", "{3336888B-772D-4949-8DEC-5E32D24A25BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "quizApp.Application", "quizApp.Application\quizApp.Application.csproj", "{3336888B-772D-4949-8DEC-5E32D24A25BC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "quizApp.UnitTest", "quizApp.UnitTest\quizApp.UnitTest.csproj", "{9E8064BC-B37F-4DEE-878D-4DB86A7D3DCB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "quizApp.IntegrationTest", "quizApp.IntegrationTest\quizApp.IntegrationTest.csproj", "{CF3085E9-CAC0-4B0B-9542-D6C288D88131}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{06A78FBB-1B79-4CAF-8DA9-C7E6FD761E13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quizApp.Client", "quizApp.Client\quizApp.Client.csproj", "{E1B6EA45-F155-4627-8133-C37A5504DF92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +41,22 @@ Global
 		{3336888B-772D-4949-8DEC-5E32D24A25BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3336888B-772D-4949-8DEC-5E32D24A25BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3336888B-772D-4949-8DEC-5E32D24A25BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E8064BC-B37F-4DEE-878D-4DB86A7D3DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E8064BC-B37F-4DEE-878D-4DB86A7D3DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E8064BC-B37F-4DEE-878D-4DB86A7D3DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E8064BC-B37F-4DEE-878D-4DB86A7D3DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF3085E9-CAC0-4B0B-9542-D6C288D88131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF3085E9-CAC0-4B0B-9542-D6C288D88131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF3085E9-CAC0-4B0B-9542-D6C288D88131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF3085E9-CAC0-4B0B-9542-D6C288D88131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06A78FBB-1B79-4CAF-8DA9-C7E6FD761E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06A78FBB-1B79-4CAF-8DA9-C7E6FD761E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06A78FBB-1B79-4CAF-8DA9-C7E6FD761E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06A78FBB-1B79-4CAF-8DA9-C7E6FD761E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1B6EA45-F155-4627-8133-C37A5504DF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1B6EA45-F155-4627-8133-C37A5504DF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1B6EA45-F155-4627-8133-C37A5504DF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1B6EA45-F155-4627-8133-C37A5504DF92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

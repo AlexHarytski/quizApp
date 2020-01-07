@@ -6,6 +6,6 @@ namespace quizApp.Application.Queries
 {
     public class GetAllUsersQuery: IRequest<List<User>>
     {
-        
+           
     }
 }

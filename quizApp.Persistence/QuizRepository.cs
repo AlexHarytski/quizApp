@@ -11,11 +11,9 @@ namespace quizApp.Persistence
     {
         private readonly IMongoCollection<Quiz> _collection;
 
-        public QuizRepository(IQuizDatabaseSettings dbSettings)
+        public QuizRepository(IMongoCollection<Quiz> collection)
         {
-            IMongoClient client = new MongoClient(dbSettings.ConnectionString);
-            IMongoDatabase database = client.GetDatabase(dbSettings.DatabaseName);
-            _collection = database.GetCollection<Quiz>(dbSettings.QuizCollectionName);
+            _collection = collection;
         }
         public async Task<List<Quiz>> GetListAsync()
         {

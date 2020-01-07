@@ -11,11 +11,11 @@ namespace quizApp.Application.Handlers
 {
     public class DeleteQuizHandler: IRequestHandler<DeleteQuizCommand, bool>
     {
-        private QuizRepository _repository;
+        private readonly IRepositoryGeneric<Quiz> _repository;
 
-        public DeleteQuizHandler(IQuizDatabaseSettings settings)
+        public DeleteQuizHandler(IRepositoryGeneric<Quiz> repository)
         {
-            _repository = new QuizRepository(settings);
+            _repository = repository;
         }
         public async Task<bool> Handle(DeleteQuizCommand request, CancellationToken cancellationToken)
         {
